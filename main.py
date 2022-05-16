@@ -137,7 +137,7 @@ def SendUserMessage(rows,conn):
 
 class MessageHandler(threading.Thread):
     def run(self):
-        #try:
+        try:
             while True:
                 print('------conn------')
                 print(self.conn)
@@ -207,9 +207,9 @@ class MessageHandler(threading.Thread):
                             message[0]=3
                             message[1]=3
                             self.conn.send(message)
-        #except:
-        #    users.remove(self)
-        #    return
+        except(ConnectionResetError):
+            users.remove(self)
+            return
 
 
 while True:
